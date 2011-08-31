@@ -163,9 +163,8 @@ static const NSInteger kLoadMaxRetries = 2;
 
     TT_RELEASE_SAFELY(_responseData);
     TT_RELEASE_SAFELY(_connection);
-    
-    [_queue loader:self didFailLoadWithError:error response:(NSHTTPURLResponse*)response data:data];
 
+    [_queue loader:self didFailLoadWithError:error];
   } else {
     [self connection:nil didReceiveResponse:(NSHTTPURLResponse*)response];
     [self connection:nil didReceiveData:data];
@@ -374,7 +373,11 @@ static const NSInteger kLoadMaxRetries = 2;
                     _response.statusCode, _urlPath);
     NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:_response.statusCode
                                      userInfo:nil];
-    [_queue loader:self didFailLoadWithError:error response:_response data:_responseData];
+    // WHEELY TEMP (begin)
+    for (TTURLRequest* request in _requests)
+      [request.response request:request processResponse:_response data:_responseData];
+    // WHEELY TEMP (end)
+    [_queue loader:self didFailLoadWithError:error];
   }
 
   TT_RELEASE_SAFELY(_responseData);
@@ -396,21 +399,18 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
 
   TTNetworkRequestStopped();
 
+  TT_RELEASE_SAFELY(_responseData);
+  TT_RELEASE_SAFELY(_connection);
+
   if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCannotFindHost
       && _retriesLeft) {
-    TT_RELEASE_SAFELY(_responseData);
-    TT_RELEASE_SAFELY(_connection);
-    
     // If there is a network error then we will wait and retry a few times in case
     // it was just a temporary blip in connectivity.
     --_retriesLeft;
     [self load:[NSURL URLWithString:_urlPath]];
 
   } else {
-    [_queue loader:self didFailLoadWithError:error response:_response data:_responseData];
-    
-    TT_RELEASE_SAFELY(_responseData);
-    TT_RELEASE_SAFELY(_connection);
+    [_queue loader:self didFailLoadWithError:error];
   }
 }
 
