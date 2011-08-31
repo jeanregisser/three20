@@ -22,9 +22,6 @@
 // UI
 #import "Three20UI/TTImageViewDelegate.h"
 
-// UI
-#import "Three20UI/TTImageViewDelegate.h"
-
 // Style
 #import "Three20Style/TTGlobalStyle.h"
 #import "Three20Style/TTDefaultStyleSheet.h"
