@@ -47,7 +47,8 @@ static const CGFloat kDefaultImageSize = 50;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)identifier {
-  if (self = [super initWithStyle:style reuseIdentifier:identifier]) {
+	self = [super initWithStyle:style reuseIdentifier:identifier];
+  if (self) {
     _imageView2 = [[TTImageView alloc] init];
     [self.contentView addSubview:_imageView2];
   }
@@ -148,7 +149,8 @@ static const CGFloat kDefaultImageSize = 50;
     : (item.imageURL ? kDefaultImageSize : 0);
 
     if (_imageView2.urlPath || image) {
-      CGFloat innerWidth = self.contentView.width - (kTableCellHPadding*2 + imageWidth + kKeySpacing);
+      CGFloat innerWidth = self.contentView.width - (kTableCellHPadding*2
+                                                     + imageWidth + kKeySpacing);
       CGFloat innerHeight = self.contentView.height - kTableCellVPadding*2;
       self.textLabel.frame = CGRectMake(kTableCellHPadding, kTableCellVPadding,
                                         innerWidth, innerHeight);

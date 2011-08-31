@@ -44,7 +44,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNext:(TTStyle*)next {
-  if (self = [super initWithNext:next]) {
+	self = [super initWithNext:next];
+  if (self) {
     _shadowOffset = CGSizeZero;
     _numberOfLines = 1;
     _textAlignment = UITextAlignmentCenter;
@@ -238,7 +239,7 @@
     if ([osVersion versionStringCompare:@"3.2"] != NSOrderedAscending) {
       shadowYOffset = _shadowOffset.height;
     }
-	  
+
     CGSize offset = CGSizeMake(_shadowOffset.width, shadowYOffset);
     CGContextSetShadowWithColor(ctx, offset, 0, _shadowColor.CGColor);
   }
