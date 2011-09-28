@@ -186,12 +186,14 @@ TT_FIX_CATEGORY_BUG(UIImageAdditions)
 
     } else if (contentMode == UIViewContentModeScaleAspectFit) {
       CGSize imageSize = self.size;
-      if (imageSize.height < imageSize.width) {
-        imageSize.height = floor((imageSize.height/imageSize.width) * rect.size.width);
+      CGFloat imageRatio = imageSize.width / imageSize.height;
+      CGFloat rectRatio = rect.size.width / rect.size.height;
+      if (imageRatio > rectRatio) {
+        imageSize.height = floor(rect.size.width / imageRatio);
         imageSize.width = rect.size.width;
 
       } else {
-        imageSize.width = floor((imageSize.width/imageSize.height) * rect.size.height);
+        imageSize.width = floor(imageRatio * rect.size.height);
         imageSize.height = rect.size.height;
       }
       return CGRectMake(rect.origin.x + floor(rect.size.width/2 - imageSize.width/2),
