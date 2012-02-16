@@ -349,9 +349,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)keyboardDidAppear:(BOOL)animated withBounds:(CGRect)bounds {
   [super keyboardDidAppear:animated withBounds:bounds];
-  CGRect screenRectInTableSuperView = [self.tableView.superview convertRect:[UIScreen mainScreen].bounds 
-															  fromView:nil];
-  CGFloat bottomOffset = CGRectGetMaxY(screenRectInTableSuperView) - CGRectGetMaxY(self.tableView.frame);
+  CGRect screenRectInTableSuperView =
+    [self.tableView.superview convertRect:[UIScreen mainScreen].bounds fromView:nil];
+  CGFloat bottomOffset =
+    CGRectGetMaxY(screenRectInTableSuperView) - CGRectGetMaxY(self.tableView.frame);
   self.tableView.frame = TTRectContract(self.tableView.frame, 0, bounds.size.height - bottomOffset);
   [self.tableView scrollFirstResponderIntoView];
   [self layoutOverlayView];
