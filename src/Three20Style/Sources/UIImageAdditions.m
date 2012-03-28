@@ -171,28 +171,20 @@ TT_FIX_CATEGORY_BUG(UIImageAdditions)
 
     } else if (contentMode == UIViewContentModeScaleAspectFill) {
       CGSize imageSize = self.size;
-      if (imageSize.height < imageSize.width) {
-        imageSize.width = floor((imageSize.width/imageSize.height) * rect.size.height);
-        imageSize.height = rect.size.height;
-
-      } else {
-        imageSize.height = floor((imageSize.height/imageSize.width) * rect.size.width);
-        imageSize.width = rect.size.width;
-      }
+      CGFloat horizontalRatio = rect.size.width / imageSize.width;
+      CGFloat verticalRatio = rect.size.height / imageSize.height;
+      CGFloat ratio = MAX(horizontalRatio, verticalRatio);
+      imageSize = CGSizeMake(floor(self.size.width * ratio), floor(self.size.height * ratio));
       return CGRectMake(rect.origin.x + floor(rect.size.width/2 - imageSize.width/2),
                         rect.origin.y + floor(rect.size.height/2 - imageSize.height/2),
                         imageSize.width, imageSize.height);
 
     } else if (contentMode == UIViewContentModeScaleAspectFit) {
       CGSize imageSize = self.size;
-      if (imageSize.height < imageSize.width) {
-        imageSize.height = floor((imageSize.height/imageSize.width) * rect.size.width);
-        imageSize.width = rect.size.width;
-
-      } else {
-        imageSize.width = floor((imageSize.width/imageSize.height) * rect.size.height);
-        imageSize.height = rect.size.height;
-      }
+      CGFloat horizontalRatio = rect.size.width / imageSize.width;
+      CGFloat verticalRatio = rect.size.height / imageSize.height;
+      CGFloat ratio = MIN(horizontalRatio, verticalRatio);
+      imageSize = CGSizeMake(floor(self.size.width * ratio), floor(self.size.height * ratio));
       return CGRectMake(rect.origin.x + floor(rect.size.width/2 - imageSize.width/2),
                         rect.origin.y + floor(rect.size.height/2 - imageSize.height/2),
                         imageSize.width, imageSize.height);
