@@ -163,7 +163,7 @@
   if (image) {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSaveGState(ctx);
-    CGRect rect = [image convertRect:context.contentFrame withContentMode:_contentMode];
+    CGRect rect = context.contentFrame;
     [context.shape addToPath:rect];
     CGContextClip(ctx);
 
