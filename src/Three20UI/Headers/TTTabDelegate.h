@@ -20,6 +20,8 @@
 
 @protocol TTTabDelegate <NSObject>
 
+@optional
+
 - (void)tabBar:(TTTabBar*)tabBar tabSelected:(NSInteger)selectedIndex;
 
 @end
