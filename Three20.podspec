@@ -32,12 +32,6 @@ overrides = Module.new do
     @private_headers_set ||= Set.new expanded_private_header_files
     @private_headers_set.include?(from) ? File.join("private", from.basename) : from.basename
   end
-  
-  # Normally CocoaPods adds the header dir to the search paths too, but in the
-  # case of Three20 we don't want that.
-  def header_search_paths
-    []
-  end
 
 end
 
@@ -58,6 +52,9 @@ Pod::Spec.new do |s|
   s.dependency 'Three20/UICommon'
   s.dependency 'Three20/UINavigator'
   s.dependency 'Three20/UI'
+  
+  # Workaround for a CocoaPods bug. It deletes everything at the root!
+  s.preserve_paths = 'src'
 
   # Full name: Three20/Core
   s.subspec 'Core' do |cs|
