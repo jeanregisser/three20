@@ -32,6 +32,12 @@ overrides = Module.new do
     @private_headers_set ||= Set.new expanded_private_header_files
     @private_headers_set.include?(from) ? File.join("private", from.basename) : from.basename
   end
+  
+  # Normally CocoaPods adds the header dir to the search paths too, but in the
+  # case of Three20 we don't want that.
+  def header_search_paths
+    []
+  end
 
 end
 
