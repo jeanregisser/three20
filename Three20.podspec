@@ -119,9 +119,6 @@ Pod::Spec.new do |s|
   s.resources = 'src/Three20.bundle'
   
   s.preferred_dependency = 'UI'
-  
-  # Workaround for a CocoaPods bug. It deletes everything at the root!
-  s.preserve_paths = 'src'
 
   # Full name: Three20/Core
   s.subspec 'Core' do |cs|
