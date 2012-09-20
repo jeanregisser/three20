@@ -250,7 +250,7 @@ __attribute__((weak_import));
       [_rootContainer navigator:self setRootViewController:_rootViewController];
 
     } else {
-      [self.window addSubview:_rootViewController.view];
+      self.window.rootViewController = _rootViewController;
     }
   }
 }
@@ -584,7 +584,7 @@ __attribute__((weak_import));
       _window = [keyWindow retain];
 
     } else {
-      _window = [[[self windowClass] alloc] initWithFrame:TTScreenBounds()];
+      _window = [[[self windowClass] alloc] initWithFrame:[UIScreen mainScreen].bounds];
       [_window makeKeyAndVisible];
     }
   }
