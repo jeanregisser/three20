@@ -77,6 +77,7 @@ Pod::Spec.new do |s|
   s.license  = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.source   = { :git => 'git@github.com:jeanregisser/three20.git' }
   s.platform = :ios
+  s.requires_arc = false
   
   s.source_files = 'src/Three20/{Sources,Headers}/*.{h,m}'
   s.resources = 'src/Three20.bundle'
@@ -138,6 +139,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/Core
   s.subspec 'Core' do |cs|
     cs.source_files = 'src/Three20Core/{Sources,Headers}/**/*.{h,m}'
+    cs.requires_arc = false
     cs.header_dir = 'Three20Core'
     cs.header_mappings_dir = 'src/Three20Core/Headers'
   end
@@ -145,6 +147,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/Network
   s.subspec 'Network' do |ns|
     ns.source_files = 'src/Three20Network/{Sources,Headers}/**/*.{h,m}'
+    ns.requires_arc = false
     ns.header_dir = 'Three20Network'
     ns.header_mappings_dir = 'src/Three20Network/Headers'
     ns.dependency 'Three20/Core'
@@ -153,6 +156,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/Style
   s.subspec 'Style' do |ss|
     ss.source_files = 'src/Three20Style/{Sources,Headers}/**/*.{h,m}'
+    ss.requires_arc = false
     ss.header_dir = 'Three20Style'
     ss.header_mappings_dir = 'src/Three20Style/Headers'
     ss.dependency 'Three20/Core'
@@ -162,6 +166,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/UICommon
   s.subspec 'UICommon' do |ucs|
     ucs.source_files = source_files = 'src/Three20UICommon/{Sources,Headers}/**/*.{h,m}'
+    ucs.requires_arc = false
     ucs.header_dir = 'Three20UICommon'
     ucs.header_mappings_dir = 'src/Three20UICommon/Headers'
     ucs.dependency 'Three20/Core'
@@ -171,6 +176,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/UINavigator
   s.subspec 'UINavigator' do |uns|
     uns.source_files = 'src/Three20UINavigator/{Sources,Headers}/**/*.{h,m}'
+    uns.requires_arc = false
     uns.header_dir = 'Three20UINavigator'
     uns.header_mappings_dir = 'src/Three20UINavigator/Headers'
     uns.dependency 'Three20/Core'
@@ -180,6 +186,7 @@ Pod::Spec.new do |s|
   # Full name: Three20/UI
   s.subspec 'UI' do |us|
     us.source_files = 'src/Three20UI/{Sources,Headers}/**/*.{h,m}'
+    us.requires_arc = false
     us.header_dir = 'Three20UI'
     us.header_mappings_dir = 'src/Three20UI/Headers'
     us.framework = 'QuartzCore'
@@ -195,6 +202,7 @@ Pod::Spec.new do |s|
     # Full name: Three20/ext/CSSStyle
     ext.subspec 'CSSStyle' do |css|
       css.source_files = 'src/extThree20CSSStyle/{Sources,Headers,ThirdPart}/*.{h,m}'
+      css.requires_arc = false
       css.header_dir = 'extThree20CSSStyle'
       css.header_mappings_dir = 'src/extThree20CSSStyle/Headers'
       css.resources = 'src/extThree20CSSStyle/Resources/extThree20CSSStyle.bundle'
@@ -206,6 +214,7 @@ Pod::Spec.new do |s|
     # Full name: Three20/ext/JSON
     ext.subspec 'JSON' do |js|
       js.source_files = 'src/extThree20JSON/{Source,Headers}/**/*.{h,m}'
+      js.requires_arc = false
       js.header_dir = 'extThree20JSON'
       js.header_mappings_dir = 'src/extThree20JSON/Headers'
       js.dependency 'Three20/Core'
@@ -216,6 +225,7 @@ Pod::Spec.new do |s|
     # This extension cannot be used with Three20/ext/YAJL
     ext.subspec 'SBJSON' do |sbs|
       sbs.source_files = 'src/extThree20JSON/Vendors/JSON/*.{h,m}'
+      sbs.requires_arc = false
       sbs.header_dir = 'extThree20JSON'
       sbs.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) EXTJSON_SBJSON' }
       sbs.dependency 'Three20/ext/JSON'
@@ -227,6 +237,7 @@ Pod::Spec.new do |s|
       ys.source_files = 'src/extThree20JSON/Vendors/YAJL/*.{h,m}', 
                         'src/extThree20JSON/Vendors/YAJL/{GHKit,GTM}/*.{h,m}',
                         'src/extThree20JSON/Vendors/YAJL/yajl/src/**/*.{h,c}'
+      ys.requires_arc = false
       ys.header_dir = 'extThree20JSON'
       ys.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) EXTJSON_YAJL' }
       ys.dependency 'Three20/ext/JSON'
@@ -235,6 +246,7 @@ Pod::Spec.new do |s|
     # Full name: Three20/ext/XML
     ext.subspec 'XML' do |xs|
       xs.source_files = 'src/extThree20XML/{Source,Headers}/*.{h,m}'
+      xs.requires_arc = false
       xs.header_dir = 'extThree20XML'
       xs.dependency 'Three20/Core'
       xs.dependency 'Three20/Network'
